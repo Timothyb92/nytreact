@@ -4,6 +4,7 @@ import Saved from '../../components/Saved';
 import Search from '../../components/Search';
 import API from '../../utils/API';
 import { Col, Row, Container } from "../../components/Grid";
+import { List, ListItem } from "../../components/List";
 
 class Articles extends Component {
   state = {
@@ -51,6 +52,25 @@ class Articles extends Component {
       <Row>
         <Col size="md-12">
           <Search />
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-12">
+          <Results>
+            {this.state.articles.length ? (
+              <List>
+                {this.state.articles.map(article => (
+                  <ListItem key={article._id}>
+                    <strong>
+                      {article.title}
+                    </strong>
+                  </ListItem>
+                ))}
+              </List>
+            ): (
+              <h3>No Results</h3>
+            )}
+          </Results>
         </Col>
       </Row>
     </Container>

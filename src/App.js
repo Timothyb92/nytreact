@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Articles from './pages/Articles';
+import NoMatch from './pages/NoMatch';
 
 class App extends Component {
   render() {
@@ -11,7 +12,10 @@ class App extends Component {
       <Router>
         <div>
           <Header />
-          <Articles />
+          <Switch>
+            <Route exact path="/" component={Articles} />
+            <Route component={NoMatch} />
+          </Switch>
         </div>
       </Router>
     );
