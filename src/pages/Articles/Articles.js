@@ -3,6 +3,7 @@ import Results from '../../components/Results';
 import Saved from '../../components/Saved';
 import Search from '../../components/Search';
 import API from '../../utils/API';
+import { Col, Row, Container } from "../../components/Grid";
 
 class Articles extends Component {
   state = {
@@ -24,7 +25,7 @@ class Articles extends Component {
     .catch(err => console.log(err));
   };
 
-  handleInputChange = () => {
+  handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
@@ -43,6 +44,18 @@ class Articles extends Component {
       .catch(err => console.log(err));
     }
   };
+
+  render() {
+    return (
+    <Container>
+      <Row>
+        <Col size="md-12">
+          <Search />
+        </Col>
+      </Row>
+    </Container>
+    )
+  }
 
 };
 
