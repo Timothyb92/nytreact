@@ -11,7 +11,8 @@ class Articles extends Component {
     articles: [],
     title: '',
     date: '',
-    url: ''
+    url: '',
+    saved: undefined
   };
 
   componentDidMount() {
@@ -71,6 +72,25 @@ class Articles extends Component {
               <h3>No Results</h3>
             )}
           </Results>
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-12">
+          <Saved>
+            {this.state.articles.saved ? (
+              <List>
+                {this.state.articles.saved.map(article => (
+                  <ListItem key={article._id}>
+                    <strong>
+                      {article.title}
+                    </strong>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <h3>No Articles Saved</h3>
+            )}
+          </Saved>
         </Col>
       </Row>
     </Container>

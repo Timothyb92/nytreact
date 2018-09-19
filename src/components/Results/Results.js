@@ -1,4 +1,5 @@
 import React from 'react';
+import './Results.css';
 
 const Results = props => {
   return (
@@ -10,7 +11,7 @@ const Results = props => {
         {props.children}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Results;
