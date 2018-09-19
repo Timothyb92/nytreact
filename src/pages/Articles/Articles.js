@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import request from 'request';
 import Results from '../../components/Results';
 import Saved from '../../components/Saved';
 import Search from '../../components/Search';
@@ -39,16 +41,20 @@ class Articles extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
     if (this.state.title) {
-      API.searchArticles({
-        title: this.state.title,
-        startYear: this.state.startYear,
-        endYear: this.state.endYear,
-        url: this.state.url
+      // console.log('if condition good')
+      request.get({
+        url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+        qs: {
+          'api-key': process.env.REACT_APP_API_KEY,
+          'q': this.state.title,
+          'begin_date': `${this.state.startYear}0101`,
+          'end_date': `${this.state.endYear}0101`
+        },
+      }, function(err, response, body) {
+        body = JSON.parse(body);
+        console.log(body);
       })
-      .then(res => this.loadArticles())
-      .catch(err => console.log(err));
     }
   };
 
@@ -67,16 +73,18 @@ class Articles extends Component {
             <Input
               value={this.state.startYear}
               onChange={this.handleInputChange}
-              name="title"
+              name="startYear"
               label="Start Year"
             />
             <Input
               value={this.state.endYear}
               onChange={this.handleInputChange}
-              name="title"
+              name="endYear"
               label="End Year"
             />
-            <button className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
+            <FormBtn
+              onClick={this.handleSubmit}
+            >Search</FormBtn>
           </Search>
         </Col>
       </Row>
