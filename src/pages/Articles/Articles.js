@@ -42,7 +42,13 @@ class Articles extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.title) {
-      // console.log('if condition good')
+      // fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${process.env.REACT_APP_API_KEY}&q=${this.state.title}&begin_date=${this.state.startYear}0101&end_date=${this.state.endYear}0101`)
+      // .then(results => {
+      //   return JSON.parse(results)
+      // })
+      // .then(data => {
+      //   console.log(data);
+      // })
       request.get({
         url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
         qs: {
@@ -53,7 +59,10 @@ class Articles extends Component {
         },
       }, function(err, response, body) {
         body = JSON.parse(body);
-        console.log(body);
+        console.log(body)
+        // body.response.docs.map(article => {
+        //   this.state.articles.push(article);
+        // })
       })
     }
   };
